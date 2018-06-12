@@ -3,9 +3,10 @@ $.getJSON("/articles", function(data) {
   // For each one
   for (var i = 0; i < data.length; i++) {
     // Display the apropos information on the page
-    $("#articles").append("<h3 class='headine' data-id='" + data[i]._id + "'>" + data[i].title + " ("
-    + moment().format("MMM Do YYYY") + 
-    ")</h3> <a href='https://www.nbcnews.com" +  data[i].link + "'>" +  data[i].link +" </a>");
+    var t1 = "<h3 class='headine' data-id='" + data[i]._id + "'>" + data[i].title + "</h3>";
+    var t2 = "<a href='https://www.nbcnews.com" +  data[i].link + "'>( "+ moment(data[i].userCreated).format("MMM Do YYYY") + " )  Go to full article </a>";
+    $("#articles").append( t1 + t2);
+     
   }
 });
 

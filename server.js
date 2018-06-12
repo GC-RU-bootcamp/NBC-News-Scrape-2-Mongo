@@ -98,9 +98,9 @@ app.get("/scrape", function(req, res) {
 });
 
 // Route for getting all Articles from the db
-app.get("/articles", function(req, res) {
+app.get("/articlesXXX", function(req, res) {
   // Grab every document in the Articles collection
-  db.Article.find({})
+  db.Article.find({$query: {}, $orderby:  {userCreated: 1}}) //.sort( { userCreated: -1 } )
     .then(function(dbArticle) {
       // If we were able to successfully find Articles, send them back to the client
       res.json(dbArticle);
@@ -108,6 +108,19 @@ app.get("/articles", function(req, res) {
     .catch(function(err) {
       // If an error occurred, send it to the client
       res.json(err);
+    });
+});
+
+app.get("/articles", function(req, res) {
+  // Grab every document in the Articles collection
+  db.Article.find({})
+    .sort({userCreated: "desc"})
+    .exec(function(err, dbArticle) {
+       // If an error occurred, send it to the client
+      if (err){
+      res.json(err);
+      }// If we were able to successfully find Articles, send them back to the client
+      res.json(dbArticle);
     });
 });
 

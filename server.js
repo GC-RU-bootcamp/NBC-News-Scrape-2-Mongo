@@ -59,7 +59,7 @@ app.get("/scrape", function(req, res) {
     var $ = cheerio.load(response.data);
 
     // Now, we grab every h2 within an article tag, and do the following:
-    $("div.story-link_default").each(function(i, element) {
+    $("div.story-link_default, div.story-link").each(function(i, element) {
       // Save an empty result object
       var result = {};
 
@@ -162,6 +162,30 @@ app.post("/articles/:id", function(req, res) {
         }
       );
     })
+    .then(function(dbArticle) {
+      // If we were able to successfully update an Article, send it back to the client
+      res.json(dbArticle);
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
+});
+
+// Route for saving/updating an Article's associated Note
+app.post("/articles-note/:id", function(req, res) {
+  // Create a new note and pass the req.body to the entry
+   db.Article.findOneAndUpdate(
+        {
+          _id: req.params.id
+        },
+        {
+          note: null
+        },
+        {
+          new: true
+        }
+    )
     .then(function(dbArticle) {
       // If we were able to successfully update an Article, send it back to the client
       res.json(dbArticle);

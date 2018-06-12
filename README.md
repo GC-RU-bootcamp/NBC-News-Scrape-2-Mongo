@@ -12,15 +12,14 @@ NBCNews.com Scraping via Cheerio.js to Mongoose/Mongo database
 
   * URL - the url to the original article with a link to full article on NBCNews.com
 
- Users can leave comments on the articles displayed and revisit them later by clicking on the Headline. The comments are saved to the database as well and associated with their articles. Users should also be able to delete comments left on articles. All stored comments are visible to every user.
+ Users can leave comments on the articles displayed and revisit them later by clicking on the Headline. The comments are saved to the database as well and associated with their articles. Users are also be able to delete comments left on articles. All stored comments are visible to every user.
 
 This application uses the following npm packages:
 
-1. express
-2. axios
-3. mongoose
-4. body-parser
-5. cheerio
-6. request
-7. morgan
+1. express -- routing
+2. body-parser -- Parse incoming request bodies
+4. axios  -- HTTP client for the browser and node.js
+3. mongoose  -- Mongo database ODM models defination and data access (CRUD)
+5. cheerio  -- html parseing / scraping
+6. morgan  -- for logging to a file
 
